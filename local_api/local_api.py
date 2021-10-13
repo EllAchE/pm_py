@@ -1,9 +1,12 @@
 from flask import Flask
+
+from local_api.PreappovePersistence import PreapprovePersistence
 from polymarket.utils import approve_erc20, load_evm_abi
 
 from polymarket import initialize_identity, buy
 
 app = Flask(__name__)
+preapprovePersitence = PreapprovePersistence()
 
 # 0x18f541b0844BEB2517A7B825a95402227536234b
 # Secretary firing by october test market address
@@ -78,10 +81,15 @@ def buyPreapprovedAmount(web3_provider, marketMakerAddress, approvedAmount, inde
 @app.route('/polypreapprove/<mmAddress>/<amount>/<gas>')
 def preapproveEndpoint(mmAddress, amount, gas):
     w3 = initialize_identity(gas)
-    return preapprove(w3, mmAddress, amount), w3
+    preapprovePersitence.setWeb3Provider(w3)
+    approvedAmount = preapprove(w3, mmAddress, amount), w3
+    preapprovePersitence.setPreapprovedAmount(approvedAmount)
+    return approvedAmount
 
-@app.route('/polypreapprove/<mmAddress>/<amount>/<gas>')
-def buyPreapprovedAmountEndpoint(mmAddress, amount, gas):
-    return buyPreapprovedAmount(w3, mmAddress, approved_amount, index, minShares) # approved amount nee
+@app.route('/polypreapprove/<mmAddress>/<index>/<minShares>') # should be able to buy without any of the args here
+def buyPreapprovedAmountEndpoint(mmAddress, index):
+    return buyPreapprovedAmount(preapprovePersitence.getWeb3Provider(), mmAddress,
+                                preapprovePersitence.getPreapprovedAmount(), index,
+                                preapprovePersitence.getPreapprovedAmount()) # approved amount nee
 
 app.run()
