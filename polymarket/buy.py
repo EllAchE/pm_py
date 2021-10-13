@@ -1,5 +1,10 @@
 from .utils import approve_erc20, load_evm_abi
 
+# def approveOnly(web3_provider, market_maker_address, amount, index, minimum_shares):
+#     return approve_erc20(web3_provider, market_maker_address, amount)
+
+# def buyOnly():
+#     pass
 
 def buy(web3_provider, market_maker_address, amount, index, minimum_shares):
     fixed_product_market_maker_address_abi = load_evm_abi('FixedProductMarketMaker.json')
