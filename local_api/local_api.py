@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/polybuy/<mmAddress>/<amount>/<outcomeIndex>/<minShares>/<gas>')
 def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
-    # Pring arguments to py console. Likely unseen
+    # Print arguments to py console. Likely unseen
     print("received args")
     print("mmAddress", mmAddress)
     print("amount", amount)
