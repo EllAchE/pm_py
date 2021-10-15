@@ -1,5 +1,6 @@
 from flask import Flask
 
+from local_api.buy_order import buyEndpoint
 from polymarket import initialize_identity, buy
 
 app = Flask(__name__)
@@ -11,41 +12,12 @@ app = Flask(__name__)
 
 @app.route('/polybuy/<mmAddress>/<amount>/<outcomeIndex>/<minShares>/<gas>')
 def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
-    # Print arguments to py console. Likely unseen
-    print("received args")
-    print("mmAddress", mmAddress)
-    print("amount", amount)
-    print("outcomeIndex", outcomeIndex)
-    print("minShares", minShares)
-    print("gas", gas)
+    return buyEndpoint(amount, gas, minShares, mmAddress, outcomeIndex)
 
-    try:
-        amount = float(amount)
-        outcomeIndex = int(outcomeIndex)
-        gas = int(gas)
-        minShares = float(minShares)
-    except Exception as e:
-        return createReturnJson(e, mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
 
-    # Actual purchase logic
-    w3 = initialize_identity(gas)
-    try :
-        trx_hash = buy(w3, mmAddress, amount, outcomeIndex, minShares)
-    except Exception as err:
-        trx_hash = err
-    print('hash made', str(trx_hash))
 
-    return createReturnJson("200 OK", mmAddress, amount, outcomeIndex, minShares, gas, trx_hash)
 
-def createReturnJson(exception, mmAddress, amount, outcomeIndex, minShares, gas, trx_hash):
-    return {
-        "isError": str(exception),
-        "mmAddress": mmAddress,
-        "amount": amount,
-        "outcomeIndex": outcomeIndex,
-        "minShares": minShares,
-        "gas": gas,
-        "transactionHash": str(trx_hash)
-    }
+
+
 
 app.run()
