@@ -1,12 +1,13 @@
 from flask import Flask
 
 from local_api.PreappovePersistence import PreapprovePersistence
-from local_api.local_buy import buyOrder, buyPreapprovedAmount
-from local_api.local_preapprove import preapproveAmount
-from local_api.local_redeem import redeemTokens
-from local_api.local_sell import sellAmount
-from local_api.local_sell_shares import sellShares
-from local_api.local_split import localSplit
+from local_api.endpoint_methods.local_buy import buyOrder, buyPreapprovedAmount
+from local_api.endpoint_methods.local_merge import mergeShares
+from local_api.endpoint_methods.local_preapprove import preapproveAmount
+from local_api.endpoint_methods.local_redeem import redeemTokens
+from local_api.endpoint_methods.local_sell import sellAmount
+from local_api.endpoint_methods.local_sell_shares import sellShares
+from local_api.endpoint_methods.local_split import localSplit
 
 app = Flask(__name__)
 persistObj = PreapprovePersistence() # todo persist approvals differently
@@ -46,5 +47,8 @@ def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, num
 def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, numberOfOutcomes, slippage, fee, gas):
     return sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas)
 
+@app.route('/polymerge/<conditionId>/<numberOfOutcomes>/<amount>')
+def mergeSharesEndpoint(conditionId, numberOfOutcomes, amount):
+    return mergeShares(conditionId, numberOfOutcomes, amount)
 
 app.run()
