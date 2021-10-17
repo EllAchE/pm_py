@@ -5,7 +5,7 @@ from local_api.local_buy import buyOrder, buyPreapprovedAmount
 from local_api.local_preapprove import preapproveAmount
 from local_api.local_redeem import redeemTokens
 from local_api.local_sell import sellAmount
-from local_api.local_sell_share import sellShares
+from local_api.local_sell_shares import sellShares
 from local_api.local_split import localSplit
 
 app = Flask(__name__)
@@ -41,5 +41,10 @@ def sellAmountEndpoint(conditionId, amount, numberOfOutcomes):
 @app.route('/polysell_shares/<conditionId>/<mmAddress>/<outcomeIndex>/<numberOfShares>/<outcomeIndex>/<numberOfOutcomes>/<slippage>/<fee>/<gas>')
 def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, numberOfOutcomes, slippage, fee, gas):
     return sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas)
+
+@app.route('/polysell_shares_with_slug/<slug>/<slippage>/<fee>/<gas>')
+def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, numberOfOutcomes, slippage, fee, gas):
+    return sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas)
+
 
 app.run()
