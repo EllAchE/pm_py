@@ -2,9 +2,7 @@ from polymarket.utils import approve_erc20
 
 from polymarket import initialize_identity
 
-from local_api.local_api import persistObj
-
-def preapproveAmount(amount, gas, mmAddress):
+def preapproveAmount(amount, gas, mmAddress, persistObj):
     w3 = initialize_identity(gas)
     persistObj.setWeb3Provider(w3)
     approvedAmount = preapprove(w3, mmAddress, amount), w3

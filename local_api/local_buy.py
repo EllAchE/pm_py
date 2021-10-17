@@ -1,5 +1,5 @@
 from polymarket import initialize_identity, buy, load_evm_abi
-from local_api.utils import createBuyReturnJson
+from utils import createBuyReturnJson
 
 def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
     # Print arguments to py console. Likely unseen
