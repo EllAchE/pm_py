@@ -17,3 +17,21 @@ def createRedeemReturnJson(exception, conditionId, numberOfChoices, gas, trx_has
         "gas": gas,
         "transactionHash": str(trx_hash)
     }
+
+def createSplitReturnJson(exception, conditionId, numberOfChoices, gas, trx_hash):
+    return {
+        "isError": str(exception),
+        "conditionId": conditionId,
+        "numberOfChoices": numberOfChoices,
+        "gas": gas,
+        "transactionHash": str(trx_hash)
+    }
+
+def createSellReturnJson(exception, mmAddress, amount, index, trx_hash):
+    return {
+        "isError": str(exception),
+        "conditionId": conditionId,
+        "numberOfChoices": numberOfChoices,
+        "gas": gas,
+        "transactionHash": str(trx_hash)
+    }

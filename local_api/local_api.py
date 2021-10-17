@@ -4,6 +4,7 @@ from local_api.PreappovePersistence import PreapprovePersistence
 from local_api.local_buy import buyOrder, buyPreapprovedAmount
 from local_api.local_preapprove import preapproveAmount
 from local_api.local_redeem import redeemTokens
+from local_api.local_split import localSplit
 
 app = Flask(__name__)
 persistObj = PreapprovePersistence()
@@ -29,6 +30,6 @@ def redeemTokensEndpoint(conditionId, numberOfOutcomes):
 
 @app.route('/polysplit/<conditionId>/<amount>/<numberOfOutcomes>/')
 def splitSharesEndpoint(conditionId, amount, numberOfOutcomes):
-    return "a"
+    return localSplit(conditionId, amount, numberOfOutcomes)
 
 app.run()
