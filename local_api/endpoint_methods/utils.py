@@ -59,3 +59,4 @@ def createSlugSellReturnJson(exception, slug, outcomeLabel, numberOfShares, slip
     }
 
 EARLY_EXIT_STRING = "Execution exited early"
+SUCCESS_RESPONSE_STRING = "200 OK"

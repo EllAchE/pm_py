@@ -1,5 +1,5 @@
 from polymarket import sell, initialize_identity
-from local_api.endpoint_methods.utils import createSellReturnJson, EARLY_EXIT_STRING
+from local_api.endpoint_methods.utils import createSellReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 
 def sellAmount(mmAddress, amount, outcomeIndex, maxShares, gas):
@@ -14,15 +14,21 @@ def sellAmount(mmAddress, amount, outcomeIndex, maxShares, gas):
     try:
         amount = float(amount)
         outcomeIndex = int(outcomeIndex)
+        maxShares = float(maxShares)
         gas = int(gas)
+
         if outcomeIndex > 10 or outcomeIndex < 0:
             return createSellReturnJson("outcomeindex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, maxShares, gas, EARLY_EXIT_STRING)
         if gas < 1:
             return createSellReturnJson("gas must be 1 or greater", mmAddress, amount, outcomeIndex, maxShares, gas, EARLY_EXIT_STRING)
+        if amount < 0 or amount > 1000:
+            return createSellReturnJson("sell amount must be from 0-1000", mmAddress, amount, outcomeIndex, maxShares, gas, EARLY_EXIT_STRING)
+        if maxShares < 0:
+            return createSellReturnJson("maxShares must be greater than zero", mmAddress, amount, outcomeIndex, maxShares, gas, EARLY_EXIT_STRING)
 
     except Exception as e:
-        pass
+        return createSellReturnJson(e, mmAddress, amount, outcomeIndex, maxShares, gas, EARLY_EXIT_STRING)
 
     w3Provider = initialize_identity(gas)
     trxHash = sell(w3Provider, mmAddress, amount, outcomeIndex, maxShares)
-    return createSellReturnJson("200 OK", mmAddress, amount, outcomeIndex, gas, trxHash)
+    return createSellReturnJson(SUCCESS_RESPONSE_STRING, mmAddress, amount, outcomeIndex, gas, maxShares, trxHash)

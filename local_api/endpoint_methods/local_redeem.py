@@ -1,4 +1,4 @@
-from local_api.endpoint_methods.utils import createRedeemReturnJson, EARLY_EXIT_STRING
+from local_api.endpoint_methods.utils import createRedeemReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 from polymarket import redeem, initialize_identity
 
 def redeemTokens(conditionId, numberOfOutcomes, gas):
@@ -22,6 +22,6 @@ def redeemTokens(conditionId, numberOfOutcomes, gas):
         # Actual purchase logic
         w3 = initialize_identity(gas)
         trxHash = redeem(w3, conditionId, numberOfOutcomes)
-        return createRedeemReturnJson("200 OK", conditionId, numberOfOutcomes, gas, trxHash)
+        return createRedeemReturnJson(SUCCESS_RESPONSE_STRING, conditionId, numberOfOutcomes, gas, trxHash)
     except Exception as e:
         return createRedeemReturnJson(e, conditionId, numberOfOutcomes, gas, EARLY_EXIT_STRING)

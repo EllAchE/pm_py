@@ -1,5 +1,5 @@
 from polymarket import initialize_identity, buy, load_evm_abi
-from utils import createBuyReturnJson, EARLY_EXIT_STRING
+from utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 
 def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
@@ -19,7 +19,7 @@ def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
         if amount > 1000 or amount < 0:
             return createBuyReturnJson("spend amount must be positive and greater than 1000", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif outcomeIndex > 10 or outcomeIndex < 0:
-            return createBuyReturnJson("outcomeindex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
+            return createBuyReturnJson("outcomeIndex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif gas < 1:
             return createBuyReturnJson("gas must be 1 or greater", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif minShares < amount:
@@ -28,16 +28,15 @@ def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
     except Exception as e:
         return createBuyReturnJson(e, mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
 
-    # Actual purchase logic
-    w3 = initialize_identity(gas)
-
     try:
+        # Actual purchase logic
+        w3 = initialize_identity(gas)
         trx_hash = buy(w3, mmAddress, amount, outcomeIndex, minShares)
     except Exception as err:
         trx_hash = err
     print('hash made', str(trx_hash))
 
-    return createBuyReturnJson("200 OK", mmAddress, amount, outcomeIndex, minShares, gas, trx_hash)
+    return createBuyReturnJson(SUCCESS_RESPONSE_STRING, mmAddress, amount, outcomeIndex, minShares, gas, trx_hash)
 
 def buyPreapprovedAmount(web3_provider, marketMakerAddress, approvedAmount, index, minShares):
     fixed_product_market_maker_address_abi = load_evm_abi('FixedProductMarketMaker.json')

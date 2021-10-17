@@ -1,5 +1,5 @@
 from polymarket import merge, initialize_identity
-from local_api.endpoint_methods.utils import createMergeReturnJson, EARLY_EXIT_STRING
+from local_api.endpoint_methods.utils import createMergeReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 
 def mergeShares(conditionId, numberOfOutcomes, amount, gas):
@@ -23,6 +23,6 @@ def mergeShares(conditionId, numberOfOutcomes, amount, gas):
     try:
         w3Provider = initialize_identity(gas)
         trxHash = merge(w3Provider, conditionId, numberOfOutcomes, amount)
-        return createMergeReturnJson("200 OK", conditionId, numberOfOutcomes, amount, gas, trxHash)
+        return createMergeReturnJson(SUCCESS_RESPONSE_STRING, conditionId, numberOfOutcomes, amount, gas, trxHash)
     except Exception as e:
         return createMergeReturnJson(e, conditionId, numberOfOutcomes, amount, gas, EARLY_EXIT_STRING)
