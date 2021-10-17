@@ -37,7 +37,7 @@ def createSplitReturnJson(exception, conditionId, numberOfChoices, gas, trx_hash
         "transactionHash": str(trx_hash)
     }
 
-def createSellReturnJson(exception, mmAddress, amount, outcomeIndex, gas, trx_hash):
+def createSellReturnJson(exception, mmAddress, amount, outcomeIndex, maxShares, gas, trx_hash):
     return {
         "isError": str(exception),
         "mmAddress": mmAddress,
@@ -57,3 +57,5 @@ def createSlugSellReturnJson(exception, slug, outcomeLabel, numberOfShares, slip
         "gas": gas,
         "transactionHash": str(trx_hash)
     }
+
+EARLY_EXIT_STRING = "Execution exited early"

@@ -1,5 +1,6 @@
 from polymarket import initialize_identity, buy, load_evm_abi
-from utils import createBuyReturnJson
+from utils import createBuyReturnJson, EARLY_EXIT_STRING
+
 
 def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
     # Print arguments to py console. Likely unseen
@@ -16,16 +17,16 @@ def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
         gas = int(gas)
         minShares = float(minShares)
         if amount > 1000 or amount < 0:
-            return createBuyReturnJson("spend amount must be positive and greater than 1000", mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
+            return createBuyReturnJson("spend amount must be positive and greater than 1000", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif outcomeIndex > 10 or outcomeIndex < 0:
-            return createBuyReturnJson("outcomeindex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
+            return createBuyReturnJson("outcomeindex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif gas < 1:
-            return createBuyReturnJson("gas must be 1 or greater", mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
+            return createBuyReturnJson("gas must be 1 or greater", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif minShares < amount:
-            return createBuyReturnJson("min shares less than amount", mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
+            return createBuyReturnJson("min shares less than amount", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
 
     except Exception as e:
-        return createBuyReturnJson(e, mmAddress, amount, outcomeIndex, minShares, gas, "Execution exited early")
+        return createBuyReturnJson(e, mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
 
     # Actual purchase logic
     w3 = initialize_identity(gas)

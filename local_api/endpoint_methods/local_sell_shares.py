@@ -2,6 +2,7 @@ from polymarket import initialize_identity, load_evm_abi
 from polymarket.amm.maths import calc_sell_amount_in_collateral
 from polymarket.utils import conditional_token_approve_for_all, get_pool_balances
 
+# todo add error checking
 def sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas):
     fixed_product_market_maker_address_abi = load_evm_abi('FixedProductMarketMaker.json')
 

@@ -27,17 +27,17 @@ def preapproveEndpoint(mmAddress, amount, gas):
 def preapprovedBuyEndpoint(mmAddress, index):
     return buyPreapprovedAmount(persistObj.getWeb3Provider(), mmAddress, persistObj.getPreapprovedAmount(), index, persistObj.getPreapprovedAmount())
 
-@app.route('/polyredeem/<conditionId>/<numberOfOutcomes>')
-def redeemTokensEndpoint(conditionId, numberOfOutcomes):
-    return redeemTokens(persistObj.getWeb3Provider(), conditionId, numberOfOutcomes)
+@app.route('/polyredeem/<conditionId>/<numberOfOutcomes>/<gas>')
+def redeemTokensEndpoint(conditionId, numberOfOutcomes, gas):
+    return redeemTokens(persistObj.getWeb3Provider(), conditionId, numberOfOutcomes, gas)
 
-@app.route('/polysplit/<conditionId>/<amount>/<numberOfOutcomes>')
-def splitSharesEndpoint(conditionId, amount, numberOfOutcomes):
-    return localSplit(conditionId, amount, numberOfOutcomes)
+@app.route('/polysplit/<conditionId>/<amount>/<numberOfOutcomes>/<gas>')
+def splitSharesEndpoint(conditionId, amount, numberOfOutcomes, gas):
+    return localSplit(conditionId, amount, numberOfOutcomes, gas)
 
-@app.route('/polysell_amount/<mmAddress>/<amount>/<outcomeIndex>')
-def sellAmountEndpoint(conditionId, amount, numberOfOutcomes):
-    return sellAmount(conditionId, amount, numberOfOutcomes)
+@app.route('/polysell_amount/<mmAddress>/<amount>/<outcomeIndex>/<gas>')
+def sellAmountEndpoint(conditionId, amount, numberOfOutcomes, gas):
+    return sellAmount(conditionId, amount, numberOfOutcomes, gas)
 
 @app.route('/polysell_shares/<conditionId>/<mmAddress>/<outcomeIndex>/<numberOfShares>/<outcomeIndex>/<numberOfOutcomes>/<slippage>/<fee>/<gas>')
 def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, numberOfOutcomes, slippage, fee, gas):
@@ -47,8 +47,8 @@ def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, num
 def sellSharesEndpoint(conditionId, mmAddress, outcomeIndex, numberOfShares, numberOfOutcomes, slippage, fee, gas):
     return sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas)
 
-@app.route('/polymerge/<conditionId>/<numberOfOutcomes>/<amount>')
-def mergeSharesEndpoint(conditionId, numberOfOutcomes, amount):
-    return mergeShares(conditionId, numberOfOutcomes, amount)
+@app.route('/polymerge/<conditionId>/<numberOfOutcomes>/<amount/<gas>')
+def mergeSharesEndpoint(conditionId, numberOfOutcomes, amount, gas):
+    return mergeShares(conditionId, numberOfOutcomes, amount, gas)
 
 app.run()
