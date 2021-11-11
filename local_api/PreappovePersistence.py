@@ -1,15 +1,11 @@
-class PreapprovePersistence:
+from local_api.PreapprovedMarket import PreapprovedMarket
 
+
+class PreapprovePersistence:
     def __init__(self):
         self.w3Provider = None
-        self.preapprovedAmount = None
+        self.preapprovedAmounts = {}
         self.minShares = None
-
-    def getPreapprovedAmount(self):
-        if self.preapprovedAmount:
-            return self.preapprovedAmount
-        else:
-            raise ValueError('Preapproved Amount is not set')
 
     def getWeb3Provider(self):
         if self.w3Provider:
@@ -17,15 +13,18 @@ class PreapprovePersistence:
         else:
             raise ValueError('Preapproved Amount is not set')
 
-    def getA(self):
-        if self.minShares:
-            return self.minShares
-        else:
-            raise ValueError('Minimum shares not set')
-
-    def setPreapprovedAmount(self, preapprovedAmount):
-        self.preapprovedAmount = preapprovedAmount
-        self.minShares = preapprovedAmount / 0.977 # todo make this something that can be passed via endpoint
-
     def setWeb3Provider(self, w3Provider):
-        self.w3Provider = w3Provider
+        if not self.w3Provider:
+            self.w3Provider = w3Provider
+        else:
+            print("w3 provider already set") # todo need to validate if the same 23 provier can be used for multiple transactions
+
+    def addPreapproval(self, mmAddress, minShares, preapprovedAmount):
+        self.preapprovedAmounts[mmAddress] = PreapprovedMarket(mmAddress, minShares, preapprovedAmount)
+
+    def getPreapproval(self, mmAddress):
+        try:
+            return self.preapprovedAmounts[mmAddress]
+        except:
+            print("preapproved amount not set for mmAddress {}, returning None".format(mmAddress))
+            return None

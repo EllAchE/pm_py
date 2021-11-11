@@ -3,7 +3,28 @@ from polymarket.amm.maths import calc_sell_amount_in_collateral
 from polymarket.utils import conditional_token_approve_for_all, get_pool_balances
 
 # todo add error checking
+from local_api.endpoint_methods.utils import EARLY_EXIT_STRING, createSellSharesReturnJson, SUCCESS_RESPONSE_STRING
+
+
 def sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas):
+    print("received args")
+    print("conditionId", conditionId)
+    print("mmAddress", mmAddress)
+    print("numberOfShares", numberOfShares)
+    print("outcomeIndex", outcomeIndex)
+    print("numberOfOutcomes", numberOfOutcomes)
+    print("slippage", slippage)
+    print("fee", fee)
+    print("gas", gas)
+
+    try:
+        outcomeIndex = int(outcomeIndex)
+        numberOfShares = float(numberOfShares)
+        gas = int(gas)
+    except Exception as e:
+        return createSellSharesReturnJson(e, mmAddress, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas, EARLY_EXIT_STRING)
+
+
     fixed_product_market_maker_address_abi = load_evm_abi('FixedProductMarketMaker.json')
 
     fixed_share_count = int(numberOfShares * (10**6))
@@ -25,5 +46,6 @@ def sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOut
 
     conditional_token_approve_for_all(w3Provider, mmAddress, False)
 
-    return trx_hash
+    return createSellSharesReturnJson(SUCCESS_RESPONSE_STRING, mmAddress, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage,
+                                      fee, gas, trx_hash)
 # todo fix this to use slug as the base does in an alternate. Time will be lost in the request/response but probably negligible

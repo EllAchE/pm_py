@@ -3,7 +3,6 @@ from local_api.endpoint_methods.utils import createSellReturnJson, EARLY_EXIT_ST
 
 
 def sellAmount(mmAddress, amount, outcomeIndex, maxShares, gas):
-    # Print arguments to py console. Likely unseen
     print("received args")
     print("mmAddress", mmAddress)
     print("amount", amount)

@@ -47,6 +47,19 @@ def createSellReturnJson(exception, mmAddress, amount, outcomeIndex, maxShares, 
         "transactionHash": str(trx_hash)
     }
 
+def createSellSharesReturnJson(exception, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas, trx_hash):
+    return {
+        "isError": str(exception),
+        "mmAddress": mmAddress,
+        "numberOfShares": numberOfShares,
+        "outcomeIndex": outcomeIndex,
+        "numberOfOutcomes": numberOfOutcomes,
+        "slippage": slippage,
+        "fee": fee,
+        "gas": gas,
+        "transactionHash": str(trx_hash)
+    }
+
 def createSlugSellReturnJson(exception, slug, outcomeLabel, numberOfShares, slippage, gas, trx_hash):
     return {
         "isError": str(exception),
