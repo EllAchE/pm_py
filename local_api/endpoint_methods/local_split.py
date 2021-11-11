@@ -17,7 +17,7 @@ def localSplit(conditionId, amount, numberOfOutcomes, gas):
         gas = int(gas)
 
         if amount > 1000 or amount < 0:
-            return createBuyReturnJson("split amount must be positive and greater than 1000", conditionId, amount, numberOfOutcomes, gas, EARLY_EXIT_STRING)
+            return createBuyReturnJson("split amount must be positive and less than 1000", conditionId, amount, numberOfOutcomes, gas, EARLY_EXIT_STRING)
         elif numberOfOutcomes > 9 or numberOfOutcomes < 1:
             return createBuyReturnJson("split number of outcomes must be at least 1 and less than 10", conditionId, amount, numberOfOutcomes, gas, EARLY_EXIT_STRING)
         elif gas < 1:

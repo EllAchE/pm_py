@@ -5,13 +5,13 @@ class PreapprovePersistence:
     def __init__(self):
         self.w3Provider = None
         self.preapprovedAmounts = {}
-        self.minShares = None
 
     def getWeb3Provider(self):
         if self.w3Provider:
             return self.w3Provider
         else:
-            raise ValueError('Preapproved Amount is not set')
+            print('Amount is not set')
+            return 'Amount is not set' # todo should not throw an error
 
     def setWeb3Provider(self, w3Provider):
         if not self.w3Provider:
@@ -25,6 +25,6 @@ class PreapprovePersistence:
     def getPreapproval(self, mmAddress):
         try:
             return self.preapprovedAmounts[mmAddress]
-        except:
-            print("preapproved amount not set for mmAddress {}, returning None".format(mmAddress))
+        except Exception as e:
+            print("preapproved amount not set for mmAddress {}, returning None.\n Exception read {}".format(mmAddress, e))
             return None

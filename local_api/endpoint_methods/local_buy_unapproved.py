@@ -18,7 +18,7 @@ def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
         gas = int(gas)
         minShares = float(minShares)
         if amount > 1000 or amount < 0:
-            return createBuyReturnJson("spend amount must be positive and greater than 1000", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
+            return createBuyReturnJson("spend amount must be positive and less than 1000", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif outcomeIndex > 10 or outcomeIndex < 0:
             return createBuyReturnJson("outcomeIndex is invalid, must be 0-10", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif gas < 1:

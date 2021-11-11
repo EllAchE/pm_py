@@ -4,7 +4,7 @@ class PreapprovedMarket:
         self.minShares = minShares
         self.mmAddress = mmAddress
 
-    def getA(self):
+    def getMinShares(self):
         if self.minShares:
             return self.minShares
         else:
