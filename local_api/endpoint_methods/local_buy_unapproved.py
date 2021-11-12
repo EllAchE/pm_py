@@ -2,21 +2,23 @@ from polymarket import initialize_identity, buy, load_evm_abi
 
 from local_api.endpoint_methods.utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
-# @app.route('/polybuy/<mmAddress>/<amount>/<outcomeIndex>/<minShares>/<gas>')
-def buyOrder(mmAddress, amount, outcomeIndex, minShares, gas):
+# @app.route('/poly/unapproved_buy/<mmAddress>/<amount>/<outcomeIndex>/<minShares>/<gas>')
+def buyOrder(mmAddress, amount, outcomeIndex, gas):
     # Print arguments to py console. Likely unseen
     print("received args")
     print("mmAddress", mmAddress)
     print("amount", amount)
     print("outcomeIndex", outcomeIndex)
-    print("minShares", minShares)
     print("gas", gas)
 
     try:
         amount = float(amount)
+        minShares = amount / 0.977
+        minShares = float(minShares)
+        print("minShares", minShares)
         outcomeIndex = int(outcomeIndex)
         gas = int(gas)
-        minShares = float(minShares)
+
         if amount > 1000 or amount < 0:
             return createBuyReturnJson("spend amount must be positive and less than 1000", mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
         elif outcomeIndex > 10 or outcomeIndex < 0:

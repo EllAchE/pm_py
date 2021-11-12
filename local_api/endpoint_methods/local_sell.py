@@ -7,13 +7,14 @@ def sellAmount(mmAddress, amount, outcomeIndex, maxShares, gas):
     print("mmAddress", mmAddress)
     print("amount", amount)
     print("outcomeIndex", outcomeIndex)
-    print("maxShares", maxShares)
     print("gas", gas)
 
     try:
         amount = float(amount)
-        outcomeIndex = int(outcomeIndex)
+        maxShares = amount / 0.002 # very low threshold, 2 tenths cent lowest
         maxShares = float(maxShares)
+        print("maxShares", maxShares)
+        outcomeIndex = int(outcomeIndex)
         gas = int(gas)
 
         if outcomeIndex > 10 or outcomeIndex < 0:
