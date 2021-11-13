@@ -12,6 +12,7 @@ def buyOrder(mmAddress, amount, outcomeIndex, gas):
     print("gas", gas)
 
     try:
+        print('checking args')
         amount = float(amount)
         minShares = amount / 0.977
         minShares = float(minShares)
@@ -30,11 +31,15 @@ def buyOrder(mmAddress, amount, outcomeIndex, gas):
 
     except Exception as e:
         return createBuyReturnJson(e, mmAddress, amount, outcomeIndex, minShares, gas, EARLY_EXIT_STRING)
+    print('checked args')
 
     try:
         # Actual purchase logic
+        print('intializing identity')
         w3 = initialize_identity(gas)
+        print('intialized identity')
         trx_hash = buy(w3, mmAddress, amount, outcomeIndex, minShares)
+        print('intialized identity')
     except Exception as err:
         trx_hash = err
     print('hash made', str(trx_hash))

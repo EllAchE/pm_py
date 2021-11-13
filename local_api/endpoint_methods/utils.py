@@ -71,5 +71,14 @@ def createSlugSellReturnJson(exception, slug, outcomeLabel, numberOfShares, slip
         "transactionHash": str(trx_hash)
     }
 
+def createPreapprovalReturnJson(exception, amount, gas, mmAddress, trx_hash):
+    return {
+        "isError": str(exception),
+        "amount": amount,
+        "mmAddress": mmAddress,
+        "gas": gas,
+        "transactionHash": str(trx_hash)
+    }
+
 EARLY_EXIT_STRING = "Execution exited early"
 SUCCESS_RESPONSE_STRING = "200 OK"

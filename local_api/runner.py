@@ -17,7 +17,7 @@ persistObj = PreapprovePersistence() # todo persist approvals differently
 # Test trigger url http://127.0.0.1:5000/polypositions
 # invalid url test http://127.0.0.1:5000/polybuy/-1000/-1000/-1000/-1000/-1000
 
-# Test trigger url http://127.0.0.1:5000/ping
+# Test trigger url http://127.0.0.1:5000/poVly/ping
 @app.route('/poly/ping')
 def ping():
     print("ping")
@@ -31,7 +31,7 @@ def unapprovedBuyOrderEndpoint(mmAddress, amount, outcomeIndex, gas):
 # Test trigger url http://127.0.0.1:5000/poly/preapprove # todo test
 @app.route('/poly/preapprove/<mmAddress>/<amount>/<gas>')
 def preapproveEndpoint(mmAddress, amount, gas):
-    return preapproveAmount(amount, gas, mmAddress)
+    return preapproveAmount(amount, gas, mmAddress, persistObj)
 
 # Test trigger url http://127.0.0.1:5000/poly/preapproved_buy # todo test
 @app.route('/poly/preapproved_buy/<mmAddress>/<index>') # should be able to buy without any of the args here. Currently only persists 1 preapprove obj in memory. Must fix overwrite
