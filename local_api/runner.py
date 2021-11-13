@@ -5,6 +5,7 @@ from local_api.endpoint_methods.local_buy_approved import buyPreapprovedAmount
 from local_api.endpoint_methods.local_buy_unapproved import buyOrder
 from local_api.endpoint_methods.local_merge import mergeShares
 from local_api.endpoint_methods.local_preapprove import preapproveAmount
+from local_api.endpoint_methods.local_redeem import redeemTokens
 from local_api.endpoint_methods.local_sell import sellAmount
 from local_api.endpoint_methods.local_sell_shares import sellShares
 from local_api.endpoint_methods.local_positions import localListPositions
@@ -59,6 +60,11 @@ def listPositionsEndpoint():
     localListPositions()
     return "Should've listed positions in console where Flask app is running"
 
+# Test trigger url http://127.0.0.1:5000/poly/redeem/
+@app.route('/poly/redeem/<conditionId>/<numberOfOutcomes>/<gas>')
+def redeemTokensEndpoint(conditionId, numberOfOutcomes, gas):
+    return redeemTokens(conditionId, numberOfOutcomes, gas)
+
 app.run()
 
 # # Test trigger url http://127.0.0.1:5000/poly/sell_shares
@@ -74,10 +80,7 @@ app.run()
 #     return sellShares(conditionId, mmAddress, numberOfShares, outcomeIndex, numberOfOutcomes, slippage, fee, gas)
 
 
-# # Test trigger url http://127.0.0.1:5000/
-# @app.route('/poly/redeem/<conditionId>/<numberOfOutcomes>/<gas>')
-# def redeemTokensEndpoint(conditionId, numberOfOutcomes, gas):
-#     return redeemTokens(conditionId, numberOfOutcomes, gas)
+
 
 
 #

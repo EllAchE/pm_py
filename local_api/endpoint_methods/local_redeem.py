@@ -20,7 +20,9 @@ def redeemTokens(conditionId, numberOfOutcomes, gas):
 
     try:
         # Actual purchase logic
+        print('initializing identity')
         w3 = initialize_identity(gas)
+        print('initialized identity')
         trxHash = redeem(w3, conditionId, numberOfOutcomes)
         return createRedeemReturnJson(SUCCESS_RESPONSE_STRING, conditionId, numberOfOutcomes, gas, trxHash)
     except Exception as e:
