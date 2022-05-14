@@ -1,4 +1,4 @@
-from local_api.endpoint_methods.utils import createBuyReturnJson, createSplitReturnJson, EARLY_EXIT_STRING, \
+from .custom_utils import createBuyReturnJson, createSplitReturnJson, EARLY_EXIT_STRING, \
     SUCCESS_RESPONSE_STRING
 from polymarket import split, initialize_identity
 

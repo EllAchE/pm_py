@@ -1,8 +1,8 @@
 from polymarket import sell, initialize_identity
-from local_api.endpoint_methods.utils import createSellReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
+from .custom_utils import createSellReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 
-def sellAmount(mmAddress, amount, outcomeIndex, maxShares, gas):
+def sellAmount(mmAddress, amount, outcomeIndex, gas):
     print("received args")
     print("mmAddress", mmAddress)
     print("amount", amount)

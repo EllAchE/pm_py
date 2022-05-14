@@ -1,6 +1,6 @@
-from polymarket import initialize_identity, buy, load_evm_abi
+from polymarket import load_evm_abi
 
-from local_api.endpoint_methods.utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
+from .custom_utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 # @app.route('/polypreapprovebuy/<mmAddress>/<index>') # should be able to buy without any of the args here. Currently only persists 1 preapprove obj in memory. Must fix overwrite
 def buyPreapprovedAmount(w3provider, mmAddress, amount, outcomeIndex, minShares):

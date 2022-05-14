@@ -1,8 +1,8 @@
 from polymarket import initialize_identity, buy, load_evm_abi
 
-from local_api.endpoint_methods.utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
+from .custom_utils import createBuyReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
-# @app.route('/poly/unapproved_buy/<mmAddress>/<amount>/<outcomeIndex>/<minShares>/<gas>')
+# @app.route('/poly/unapproved_buy/<mmAddress>/<amount>/<outcomeIndex>/<gas>')
 def buyOrder(mmAddress, amount, outcomeIndex, gas):
     # Print arguments to py console. Likely unseen
     print("received args")

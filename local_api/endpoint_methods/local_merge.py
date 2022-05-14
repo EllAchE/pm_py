@@ -1,5 +1,5 @@
 from polymarket import merge, initialize_identity
-from local_api.endpoint_methods.utils import createMergeReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
+from .custom_utils import createMergeReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 
 
 def mergeShares(conditionId, numberOfOutcomes, amount, gas):

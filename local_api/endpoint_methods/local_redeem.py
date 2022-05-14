@@ -1,4 +1,4 @@
-from local_api.endpoint_methods.utils import createRedeemReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
+from .custom_utils import createRedeemReturnJson, EARLY_EXIT_STRING, SUCCESS_RESPONSE_STRING
 from polymarket import redeem, initialize_identity
 
 def redeemTokens(conditionId, numberOfOutcomes, gas):

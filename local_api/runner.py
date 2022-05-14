@@ -1,15 +1,14 @@
 from flask import Flask
 
-from local_api.PreappovePersistence import PreapprovePersistence
-from local_api.endpoint_methods.local_buy_approved import buyPreapprovedAmount
-from local_api.endpoint_methods.local_buy_unapproved import buyOrder
-from local_api.endpoint_methods.local_merge import mergeShares
-from local_api.endpoint_methods.local_preapprove import preapproveAmount
-from local_api.endpoint_methods.local_redeem import redeemTokens
-from local_api.endpoint_methods.local_sell import sellAmount
-from local_api.endpoint_methods.local_sell_shares import sellShares
-from local_api.endpoint_methods.local_positions import localListPositions
-from local_api.endpoint_methods.local_split import localSplit
+from PreappovePersistence import PreapprovePersistence
+from endpoint_methods.local_buy_approved import buyPreapprovedAmount
+from endpoint_methods.local_buy_unapproved import buyOrder
+from endpoint_methods.local_merge import mergeShares
+from endpoint_methods.local_preapprove import preapproveAmount
+from endpoint_methods.local_redeem import redeemTokens
+from endpoint_methods.local_sell import sellAmount
+from endpoint_methods.local_positions import localListPositions
+from endpoint_methods.local_split import localSplit
 
 app = Flask(__name__)
 persistObj = PreapprovePersistence() # todo persist approvals differently
@@ -18,7 +17,7 @@ persistObj = PreapprovePersistence() # todo persist approvals differently
 # Test trigger url http://127.0.0.1:5000/polypositions
 # invalid url test http://127.0.0.1:5000/polybuy/-1000/-1000/-1000/-1000/-1000
 
-# Test trigger url http://127.0.0.1:5000/poVly/ping
+# Test trigger url http://127.0.0.1:5000/poly/ping
 @app.route('/poly/ping')
 def ping():
     print("ping")
@@ -50,7 +49,7 @@ def splitSharesEndpoint(conditionId, amount, numberOfOutcomes, gas):
     return localSplit(conditionId, amount, numberOfOutcomes, gas)
 
 # Test trigger url http://127.0.0.1:5000/poly/merge # todo test
-@app.route('/poly/merge/<conditionId>/<numberOfOutcomes>/<amount>/<gas>')
+@app.route('/poly/merge/<conditionId>/<amount>/<numberOfOutcomes>/<gas>')
 def mergeSharesEndpoint(conditionId, numberOfOutcomes, amount, gas):
     return mergeShares(conditionId, numberOfOutcomes, amount, gas)
 

@@ -1,4 +1,4 @@
-from local_api.PreapprovedMarket import PreapprovedMarket
+from PreapprovedMarket import PreapprovedMarket
 
 
 class PreapprovePersistence:

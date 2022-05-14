@@ -2,7 +2,7 @@ from polymarket.utils import approve_erc20
 
 from polymarket import initialize_identity
 
-from local_api.endpoint_methods.utils import createPreapprovalReturnJson, SUCCESS_RESPONSE_STRING
+from .custom_utils import createPreapprovalReturnJson, SUCCESS_RESPONSE_STRING
 
 
 def preapproveAmount(amount, gas, mmAddress, persistObj):
