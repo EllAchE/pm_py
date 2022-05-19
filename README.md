@@ -1,6 +1,8 @@
 # Polymarket Flask API
 
-This project was built on top of PolyTrader's https://github.com/PolyTrader/polymarket CLI tool. README for that CLI tool is below
+This project was built on top of PolyTrader's https://github.com/PolyTrader/polymarket CLI tool. README for that CLI tool is below.
+
+Run the api locally and send trades via localhost.
 
 # trade-cli
 Simple cli tool for trading on PolyMarket
